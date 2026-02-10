@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lovely Admin</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <style>
+        body { background: #e0e5ec; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #e0e5ec; padding: 40px; border-radius: 30px; box-shadow: 20px 20px 60px #bec3c9, -20px -20px 60px #ffffff; text-align: center; width: 320px; }
+        input { padding: 15px; border: none; border-radius: 12px; box-shadow: inset 6px 6px 12px #bec3c9, inset -6px -6px 12px #ffffff; background: #e0e5ec; width: 90%; outline: none; margin-bottom: 25px; }
+        button { padding: 15px 30px; border: none; border-radius: 12px; background: #6366f1; color: white; font-weight: bold; cursor: pointer; box-shadow: 6px 6px 12px #bec3c9, -6px -6px 12px #ffffff; width: 100%; }
+        button:active { box-shadow: inset 4px 4px 8px #bec3c9, inset -4px -4px 8px #ffffff; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h2>Update ID</h2>
+    <input type="text" id="vidInput" placeholder="YouTube ID">
+    <button onclick="saveToFirebase()">UPDATE</button>
+</div>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyDahNKp2jaiJSHzNkKw_VtcCR55y9-IHTQ",
+        databaseURL: "https://lovely-7c35f-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+    firebase.initializeApp(firebaseConfig);
+    function saveToFirebase() {
+        const newId = document.getElementById('vidInput').value.trim();
+        if(newId) {
+            firebase.database().ref('video_data').update({ current_id: newId }).then(() => { alert("Updated!"); });
+        }
+    }
+</script>
+</body>
+</html>
